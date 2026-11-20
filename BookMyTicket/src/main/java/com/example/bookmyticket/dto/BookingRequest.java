@@ -1,0 +1,1 @@
+package com.example.bookmyticket.dto; import jakarta.validation.constraints.*; import java.util.List; public record BookingRequest(@NotBlank String customerName,@NotBlank @Email String email,@NotNull Long showId,@NotEmpty List<String> seats){}

@@ -1,0 +1,1 @@
+package com.example.bookmyticket.repository; import com.example.bookmyticket.entity.Movie; import org.springframework.data.jpa.repository.JpaRepository; public interface MovieRepository extends JpaRepository<Movie,Long>{}

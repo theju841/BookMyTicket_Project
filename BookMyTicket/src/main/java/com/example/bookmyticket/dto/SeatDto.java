@@ -1,0 +1,1 @@
+package com.example.bookmyticket.dto; public record SeatDto(String seatNumber,boolean booked){}

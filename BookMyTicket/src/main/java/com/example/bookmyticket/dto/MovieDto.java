@@ -1,0 +1,1 @@
+package com.example.bookmyticket.dto; public record MovieDto(Long id,String title,String genre,String language,Integer durationMinutes,String description,String posterUrl){}

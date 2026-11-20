@@ -1,0 +1,1 @@
+package com.example.bookmyticket.dto; import java.math.BigDecimal; import java.time.LocalDateTime; public record ShowDto(Long id,Long movieId,String movieTitle,String theatreName,String location,LocalDateTime startTime,BigDecimal ticketPrice,Integer totalSeats){}

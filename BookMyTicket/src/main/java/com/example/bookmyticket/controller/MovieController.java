@@ -1,0 +1,7 @@
+package com.example.bookmyticket.controller;
+import com.example.bookmyticket.dto.*; import com.example.bookmyticket.entity.*; import com.example.bookmyticket.repository.*; import org.springframework.web.bind.annotation.*; import java.time.LocalDateTime; import java.util.List;
+@RestController @RequestMapping("/api") public class MovieController { private final MovieRepository movies; private final MovieShowRepository shows; public MovieController(MovieRepository m,MovieShowRepository s){movies=m;shows=s;}
+ @GetMapping("/movies") public List<MovieDto> movies(){return movies.findAll().stream().map(this::movieDto).toList();}
+ @GetMapping("/movies/{id}") public MovieDto movie(@PathVariable Long id){return movieDto(movies.findById(id).orElseThrow(()->new IllegalArgumentException("Movie not found")));}
+ @GetMapping("/shows") public List<ShowDto> shows(@RequestParam(required=false) Long movieId){List<MovieShow> list=movieId==null?shows.findByStartTimeAfterOrderByStartTimeAsc(LocalDateTime.now()):shows.findByMovieIdAndStartTimeAfterOrderByStartTimeAsc(movieId,LocalDateTime.now());return list.stream().map(s->new ShowDto(s.getId(),s.getMovie().getId(),s.getMovie().getTitle(),s.getTheatre().getName(),s.getTheatre().getLocation(),s.getStartTime(),s.getTicketPrice(),s.getTotalSeats())).toList();}
+ private MovieDto movieDto(Movie m){return new MovieDto(m.getId(),m.getTitle(),m.getGenre(),m.getLanguage(),m.getDurationMinutes(),m.getDescription(),m.getPosterUrl());}}
